@@ -38,9 +38,9 @@ tap_install:
     metadata_store:
       ns_for_export_app_cert: '*'
       app_service_type: ClusterIP
-    scanning:
-      metadataStore:
-        url: metadata-store.aks-usw2-1.tanzu.pro
+    # scanning:
+    #   metadataStore:
+    #     url: metadata-store.aks-usw2-1.tanzu.pro
     grype:
       namespace: default
       targetImagePullSecret: registries-credentials
@@ -50,7 +50,7 @@ tap_install:
       domain_template: '{{.Name}}-{{.Namespace}}.{{.Domain}}'
     api_portal:
       apiPortalServer:
-        sourceUrls: https://petstore.swagger.io/v2/swagger.json,http://customer-profile-x.default.svc.cluster.local:8080/api-docs,http://scg-operator.tap-install.svc.cluster.local/openapi
+        sourceUrls: https://petstore.swagger.io/v2/swagger.json,http://customer-profile-x.default.svc.cluster.local:8080/api-docs,http://scg-openapi-service.spring-cloud-gateway.svc.cluster.local/openapi
         trustInsecureSourceUrls: true
         sourceUrlsCacheTtlSec: "30"
         sourceUrlsTimeoutSec: "30"
@@ -118,9 +118,6 @@ tap_install:
     - name: cartographer
       secrets:
       - name: reqfix-overlay-secret
-    - name: cert-manager
-      secrets:
-      - name: reqfix-overlay-secret
     - name: cnrs
       secrets:
       - name: reqfix-overlay-secret
@@ -133,19 +130,10 @@ tap_install:
     - name: developer-conventions
       secrets:
       - name: reqfix-overlay-secret
-    - name: eventing
-      secrets:
-      - name: reqfix-overlay-secret
     - name: fluxcd-source-controller
       secrets:
       - name: reqfix-overlay-secret
     - name: grype
-      secrets:
-      - name: reqfix-overlay-secret
-    - name: learningcenter
-      secrets:
-      - name: reqfix-overlay-secret
-    - name: learningcenter-workshops
       secrets:
       - name: reqfix-overlay-secret
     - name: metadata-store
